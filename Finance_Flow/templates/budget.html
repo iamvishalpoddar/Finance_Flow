@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Set Budget | FinanceFlow</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eaf3fc;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    .header {
+      background-color: #1d3557;
+      color: white;
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      padding: 6px 10px;
+      border-radius: 5px;
+    }
+
+    .nav-links a:hover {
+      background-color: #457b9d;
+    }
+
+    .container {
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 700;
+      color: #1d3557;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 28px 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      padding: 12px;
+      font-size: 15px;
+      border: 1.5px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9fbfd;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 6px rgba(0, 123, 255, 0.25);
+    }
+
+    input[type="submit"] {
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 3px 8px rgba(0, 123, 255, 0.25);
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/combo-chart.png" alt="FinanceFlow Logo">
+      <span>FinanceFlow</span>
+    </div>
+    <div class="nav-links">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/transactions/add">Add Transaction</a>
+      <a href="/transactions/view">View Transactions</a>
+      <a href="/transactions/budget/set">Set Budget</a>
+      <a href="/transactions/report">Report</a>
+      <a href="#" onclick="confirmLogout()">Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Set Monthly Budget</h1>
+    <form method="POST">
+      <input type="text" name="month" placeholder="Month" required />
+      <input type="number" name="budget" placeholder="Budget Amount" required />
+      <input type="submit" value="Set Budget" />
+    </form>
+  </div>
+  <script>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          alert("{{ message }}");
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    function confirmLogout() {
+      if (confirm("Are you sure you want to log out?")) {
+        window.location.href = "/logout";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FinanceFlow - Manage Your Finances</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #eaf3fc;
+      color: #1a1a1a;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: transparent;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #1d3557;
+    }
+
+    .logo img {
+      height: 28px;
+      margin-right: 0.5rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .login {
+      background-color: #1d7a32;
+      color: white;
+    }
+
+    .login:hover {
+      background-color: #155f25;
+    }
+
+    .signup {
+      background-color: #fce26a;
+      color: #1a1a1a;
+    }
+
+    .signup:hover {
+      background-color: #e2c93c;
+    }
+
+    .hero {
+      padding: 5rem 2rem;
+      text-align: left;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      color: #1d3557;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #4a4a4a;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/50/228BE6/combo-chart.png" alt="FinanceFlow Logo">
+      <span>FinanceFlow</span>
+    </div>
+    <div class="buttons">
+      <a href="/login" class="btn login">Log In</a>
+      <a href="/register" class="btn signup">Sign Up</a>
+    </div>
+  </header>
+
+  <main class="hero">
+    <h1>Effortlessly Manage Your Finances</h1>
+    <p>Track expenses, build savings, and reach your financial goals with ease using FinanceFlow — your all-in-one money manager.</p>
+  </main>
+</body>
+</html>

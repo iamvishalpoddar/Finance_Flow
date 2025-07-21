@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eaf3fc;
+      color: #222;
+    }
+
+    .header {
+      background-color: #1d3557;
+      color: white;
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      padding: 6px 10px;
+      border-radius: 5px;
+    }
+
+    .nav-links a:hover {
+      background-color: #457b9d;
+    }
+
+    .content {
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0 0 30px;
+      font-size: 32px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 1100px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .value,
+    .budget-set {
+      font-weight: bold;
+      font-size: 20px;
+      color: black;
+      margin-top: 5px;
+    }
+
+    .no-budget {
+      color: red;
+      font-style: italic;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      max-width: 1100px;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      /* border: 1px solid #ccc; */
+      padding: 12px 14px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #1d3557;
+      color: white;
+      font-weight: 600;
+    }
+
+    td {
+      background-color: #ffffff;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f4f9fd;
+    }
+
+    a.view-link {
+      color: #1d3557;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 10px 20px;
+      background-color: #f1faff;
+      border: 1px solid #1d3557;
+      border-radius: 6px;
+      transition: 0.3s;
+      margin-bottom: 40px;
+    }
+
+    a.view-link:hover {
+      background-color: #1d3557;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/combo-chart.png" alt="FinanceFlow Logo">
+      <span>FinanceFlow</span>
+    </div>
+    <div class="nav-links">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/transactions/add">Add Transaction</a>
+      <a href="/transactions/view">View Transactions</a>
+      <a href="/transactions/budget/set">Set Budget</a>
+      <a href="/transactions/report">Report</a>
+      <a href="#" onclick="confirmLogout()">Logout</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1>Welcome, {{user_name}}</h1>
+    <div class="summary">
+      <div class="card">
+        <h3>Income</h3>
+        <div class="value">₹{{income}}</div>
+      </div>
+      <div class="card">
+        <h3>Expenses</h3>
+        <div class="value">₹{{expense}}</div>
+      </div>
+      <div class="card">
+        <h3>Net Savings</h3>
+        <div class="value">₹{{saving}}</div>
+      </div>
+      <div class="card">
+        <h3>Budget</h3>
+        {% if budget is string %}
+          <div class="no-budget">{{ budget }}</div>
+        {% else %}
+          <div class="budget-set">₹{{ budget }}</div>
+        {% endif %}
+      </div>
+    </div>
+    <h2>Recent Transactions</h2>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Date</th>
+      </tr>
+      {% if length < 4 %}
+        {% for i in range(length) %}
+            <tr>
+                <td>{{ sorted_li[i]['title'] }}</td>
+                <td>₹{{ sorted_li[i]['amount'] }}</td>
+                <td>{{ sorted_li[i]['type'] }}</td>
+                <td>{{ sorted_li[i]['date'] }}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        {% for i in range(4) %}
+            <tr>
+                <td>{{ sorted_li[i]['title'] }}</td>
+                <td>₹{{ sorted_li[i]['amount'] }}</td>
+                <td>{{ sorted_li[i]['type'] }}</td>
+                <td>{{ sorted_li[i]['date'] }}</td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    </table>
+
+    <a href="/transactions/view" class="view-link">→ View all transactions</a>
+  </div>
+  <script>
+    function confirmLogout() {
+      if (confirm("Are you sure you want to log out?")) {
+        window.location.href = "/logout";
+      }
+    }
+  </script>
+</body>
+</html>

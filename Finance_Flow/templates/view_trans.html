@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Transactions | FinanceFlow</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eaf3fc;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    .header {
+      background-color: #1d3557;
+      color: white;
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      padding: 6px 10px;
+      border-radius: 5px;
+    }
+
+    .nav-links a:hover {
+      background-color: #457b9d;
+    }
+
+    .container {
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 28px;
+      color: #1d3557;
+    }
+
+    .transaction {
+      background-color: white;
+      width: 100%;
+      max-width: 500px;
+      padding: 18px 25px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .transaction-details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 16px;
+    }
+
+    .transaction-details div {
+      line-height: 1.4;
+    }
+
+    .transaction-details strong {
+      font-weight: bold;
+      color: #1d3557;
+    }
+
+    form {
+      margin: 0;
+    }
+
+    input[type="submit"] {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 6px rgba(220, 53, 69, 0.3);
+    }
+
+    input[type="submit"]:hover {
+      background-color: #a71d2a;
+      box-shadow: 0 4px 8px rgba(167, 29, 42, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/combo-chart.png" alt="FinanceFlow Logo">
+      <span>FinanceFlow</span>
+    </div>
+    <div class="nav-links">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/transactions/add">Add Transaction</a>
+      <a href="/transactions/view">View Transactions</a>
+      <a href="/transactions/budget/set">Set Budget</a>
+      <a href="/transactions/report">Report</a>
+      <a href="#" onclick="confirmLogout()">Logout</a>
+  </div>
+  </div>
+
+  <div class="container">
+    <h1>View Transactions</h1>
+    <a href="/transactions/download_pdf" class="download-pdf-button" style="
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    ">Download as PDF</a>
+
+    {% for item in trans_li %}
+    <div class="transaction">
+      <div class="transaction-details">
+        <div><strong>Title:</strong> {{ item.title }}</div>
+        <div><strong>Type:</strong> {{ item.type }}</div>
+        <div><strong>Amount:</strong> ₹<strong>{{ item.amount }}</strong></div>
+      </div>
+      <form method="POST" action="/transactions/del">
+        <input name="unique_id" value="{{ item.unique_id }}" hidden />
+        <input type="submit" value="Delete" />
+      </form>
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <script>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          alert("{{ message }}");
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    function confirmLogout() {
+      if (confirm("Are you sure you want to log out?")) {
+        window.location.href = "/logout";
+      }
+    }
+  </script>
+</body>
+</html>

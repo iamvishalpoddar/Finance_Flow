@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | FinanceFlow</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eaf3fc;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #1d3557;
+    }
+
+    .logo img {
+      height: 28px;
+      margin-right: 0.5rem;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 12px 10px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #1d3557;
+      background-color: #f4f9fd;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input::placeholder {
+      color: #1d3557;
+      opacity: 0.8;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #228be6;
+      box-shadow: 0 0 5px rgba(34, 139, 230, 0.3);
+    }
+
+    input[type="submit"] {
+      background-color: #1d7a32;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #155f25;
+    }
+
+    p {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+
+    .error {
+      color: red;
+      font-weight: 600;
+    }
+
+    a {
+      text-decoration: none;
+      color: #228be6;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/50/228BE6/combo-chart.png" alt="FinanceFlow Logo">
+      <span>FinanceFlow</span>
+    </div>
+  </header>
+
+  <form method="POST">
+    <input name="name" type="text" placeholder="Name" required />
+    <input name="phone_no" type="number" placeholder="Phone Number" required />
+    <input name="email" type="email" placeholder="Email ID" required />
+    <input name="password" type="password" placeholder="Password" required />
+    <input type="submit" value="Sign Up" />
+  </form>
+
+  {% if status %}
+    <p class="error">{{status}}</p>
+  {% endif %}
+
+  <p>Already have an account? <a href="/login">Login</a></p>
+</body>
+</html>

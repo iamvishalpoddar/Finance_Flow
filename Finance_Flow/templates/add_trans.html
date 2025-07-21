@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Transaction | FinanceFlow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eaf3fc;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    .header {
+      background-color: #1d3557;
+      color: white;
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      padding: 6px 10px;
+      border-radius: 5px;
+    }
+
+    .nav-links a:hover {
+      background-color: #457b9d;
+    }
+
+    .container {
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 24px;
+      font-weight: 700;
+      font-size: 28px;
+      text-align: center;
+      color: #1d3557;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 32px 28px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      padding: 12px 10px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #1d3557;
+      background-color: #f4f9fd;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input::placeholder,
+    select {
+      color: #1d3557;
+      opacity: 0.9;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #228be6;
+      box-shadow: 0 0 5px rgba(34, 139, 230, 0.3);
+      outline: none;
+    }
+
+    input[type="submit"] {
+      padding: 14px;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+      box-shadow: 0 6px 12px rgba(0, 86, 179, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/combo-chart.png" alt="FinanceFlow Logo">
+      <span>FinanceFlow</span>
+    </div>
+    <div class="nav-links">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/transactions/add">Add Transaction</a>
+      <a href="/transactions/view">View Transactions</a>
+      <a href="/transactions/budget/set">Set Budget</a>
+      <a href="/transactions/report">Report</a>
+      <a href="#" onclick="confirmLogout()">Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Add Transaction</h1>
+    <form method="POST">
+      <input name="title" id="title" placeholder="Title" type="text" required />
+      <select name="type" id="type" required>
+        <option value="" disabled selected>Income or Expense</option>
+        <option value="Income">Income</option>
+        <option value="Expense">Expense</option>
+      </select>
+      <input name="amount" id="amount" type="number" placeholder="Amount" required />
+      <input type="submit" value="Add Transaction" />
+    </form>
+  </div>
+  <script>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          alert("{{ message }}");
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    function confirmLogout() {
+      if (confirm("Are you sure you want to log out?")) {
+        window.location.href = "/logout";
+      }
+    }
+  </script>
+</body>
+</html>
