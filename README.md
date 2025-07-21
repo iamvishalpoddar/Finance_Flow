@@ -11,12 +11,6 @@ Finance Flow is a web-based personal finance management application built with F
 - Generate monthly financial reports
 - Secure data storage with MongoDB
 
-## Screenshots
-
-![Dashboard](static/income_expense_pie.png)
-![Expense Breakdown](static/expense_breakdown_pie.png)
-![Monthly Report](static/monthly_report_bar.png)
-
 ## Getting Started
 
 ### Prerequisites
